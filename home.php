@@ -194,7 +194,7 @@ $row = mysqli_fetch_assoc($result);
                 </div>
             </div>
 
-            <div class="col-md-2 col-4">
+           <div class="col-md-2 col-4">
                 <div class="game-card">
                     <img src="https://upload.wikimedia.org/wikipedia/en/2/25/PUBG_Battlegrounds_key_art.jpg" class="game-img" alt="PUBG">
                     <div class="game-title">PUBG</div>
@@ -202,6 +202,5 @@ $row = mysqli_fetch_assoc($result);
             </div>
 
         </div>
-    </div>
-</body>
-</html>
+    </div> 
+    <?php include('footer.php'); ?>

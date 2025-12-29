@@ -24,28 +24,36 @@ if (!isset($_SESSION['role']) || $_SESSION['role'] !== 'admin') {
 
 $msg = "";
 
-// 2. كود إضافة بطولة جديدة عند ضغط الزر
-if (isset($_POST['add_tournament'])) {
+
+if (isset($_POST['b2'])) {
     $name = $_POST['name'];
     $game_name = $_POST['game_name'];
     $date = $_POST['date'];
     $prize = $_POST['prize'];
-
-    $sql = "INSERT INTO tournaments (name, game_name, date, prize, status) 
-            VALUES ('$name', '$game_name', '$date', '$prize', 'open')";
-    
-    if (mysqli_query($conn, $sql)) {
-        $msg = "Tournament Added Successfully!";
+    $status = "open";
+    $sql1 = "INSERT INTO `tournaments` (`name`, `game_name`, `date`, `prize`, `status`)
+     VALUES ( '$name', '$game_name', '$date', '$prize', '$status');";
+    $result1 = mysqli_query($conn, $sql1);
+    if ($result1) {
+        header("Location: admin_home.php?success=1");
+       
     } else {
-        $msg = "Error: " . mysqli_error($conn);
+        $msg = "Error adding tournament: " . mysqli_error($conn);
     }
+    
+}
+if (isset($_GET['success'])) {
+    $msg = "Tournament Added Successfully!";
 }
 ?>
+           
+                   
+
 
 <nav class="navbar navbar-dark bg-dark mb-4">
     <div class="container">
         <span class="navbar-brand">Admin Control Panel</span>
-        <a href="logout.php" class="btn btn-danger btn-sm">Logout</a>
+        <a href="login.php" class="btn btn-danger btn-sm">Logout</a>
     </div>
 </nav>
 
@@ -55,13 +63,13 @@ if (isset($_POST['add_tournament'])) {
     <div class="row">
         <div class="col-md-4">
             <div class="card p-3 shadow">
-                <h4 class="mb-3 text-center">Add New Tournament</h4>
+                <h4 class="mb-3 text-center" style="color: #ffffff">Add New Tournament</h4>
                 <form method="post">
-                    <div class="mb-2">
+                    <div class="mb-2" style="color: #ffffff">
                         <label>Tournament Name:</label>
                         <input type="text" name="name" class="form-control" required>
                     </div>
-                    <div class="mb-2">
+                    <div class="mb-2" style="color: #ffffff">
                         <label>Game:</label>
                         <select name="game_name" class="form-select">
                             <option value="Call of Duty">Call of Duty</option>
@@ -71,21 +79,21 @@ if (isset($_POST['add_tournament'])) {
                             <option value="GTA V">GTA V</option>
                         </select>
                     </div>
-                    <div class="mb-2">
+                    <div class="mb-2" style="color: #ffffff">
                         <label>Date:</label>
                         <input type="date" name="date" class="form-control" required>
                     </div>
-                    <div class="mb-2">
+                    <div class="mb-2" style="color: #ffffff">
                         <label>Prize ($):</label>
                         <input type="text" name="prize" class="form-control" placeholder="e.g. 1000$" required>
                     </div>
-                    <button type="submit" name="add_tournament" class="btn btn-primary w-100 mt-3">Add Tournament</button>
+                    <button type="submit" name="b2" class="btn btn-primary w-100 mt-3">Add Tournament</button>
                 </form>
             </div>
         </div>
 
         <div class="col-md-8">
-            <div class="card p-3 shadow">
+            <div class="card p-3 shadow" style="color: #ffffff">
                 <h4>Manage Tournaments</h4>
                 <table class="table table-dark table-hover mt-3">
                     <thead>
@@ -97,24 +105,25 @@ if (isset($_POST['add_tournament'])) {
                             <th>Prize</th>
                             <th>Status</th>
                         </tr>
-                    </thead>
-                    <tbody>
                         <?php
-                        // جلب البطولات من قاعدة البيانات
-                        $sql2 = "SELECT * FROM tournaments ORDER BY id DESC";
-                        $result2 = mysqli_query($conn, $sql2);
+                         $sql2 = "SELECT * FROM tournaments ORDER BY id DESC";
+               $result2 = mysqli_query($conn, $sql2);
                         
-                        while ($row = mysqli_fetch_assoc($result2)) {
-                            echo "<tr>";
-                            echo "<td>" . $row['id'] . "</td>";
-                            echo "<td>" . $row['name'] . "</td>";
-                            echo "<td>" . $row['game_name'] . "</td>";
-                            echo "<td>" . $row['date'] . "</td>";
-                            echo "<td>" . $row['prize'] . "</td>";
-                            echo "<td>" . $row['status'] . "</td>";
+                while ($row = mysqli_fetch_assoc($result2)) {
+                           echo "<tr>";
+                 echo "<td>" . $row['id'] . "</td>";
+                     echo "<td>" . $row['name'] . "</td>";
+                   echo "<td>" . $row['game_name'] . "</td>";
+                          echo "<td>" . $row['date'] . "</td>";
+                          echo "<td>" . $row['prize'] . "</td>";
+                        echo "<td>" . $row['status'] . "</td>";
                             echo "</tr>";
                         }
                         ?>
+
+                    </thead>
+                    <tbody>
+                        
                     </tbody>
                 </table>
             </div>
