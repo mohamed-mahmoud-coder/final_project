@@ -1,0 +1,79 @@
+/* style.css */
+
+body {
+    background-color: #1a1a2e;
+    color: #fff;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    min-height: 100vh; 
+    display: flex;
+    flex-direction: column;
+}
+
+.wrapper {
+    flex: 1; 
+    display: flex;
+    align-items: center;
+    justify-content: center; 
+    width: 100%;
+    padding: 20px;
+}
+
+.card {
+    background-color: #16213e;
+    border: 1px solid #0f3460;
+    border-radius: 15px;
+    box-shadow: 0 0 20px rgba(0,0,0,0.5);
+    width: 100%; 
+    max-width: 500px; 
+}
+
+.card-title-text {
+    color: #e94560;
+}
+
+.form-control, .form-select {
+    background-color: #0f3460;
+    border: 1px solid #1a1a2e;
+    color: #fff;
+}
+
+.form-control:focus, .form-select:focus {
+    background-color: #1a1a2e;
+    border-color: #e94560;
+    color: #fff;
+    box-shadow: none;
+}
+
+label { 
+    color: #ccc; 
+    margin-bottom: 5px; 
+}
+
+.btn-custom {
+    background-color: #e94560;
+    color: white;
+    font-weight: bold;
+    border: none;
+    transition: 0.3s;
+}
+
+.btn-custom:hover { 
+    background-color: #c0354e; 
+    color: white; 
+}
+
+.btn-cancel {
+    background-color: #6c757d;
+    color: white;
+    border: none;
+}
+
+.btn-cancel:hover { 
+    background-color: #5a6268; 
+    color: white; 
+}
+
+/* Navbar specific spacing if needed */
+.navbar {
+    margin-bottom: 0;
+}

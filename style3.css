@@ -1,0 +1,76 @@
+/* style.css */
+
+body {
+    background-color: #1a1a2e;
+    color: #fff;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    min-height: 100vh;
+}
+
+/* Navbar Styling */
+.navbar-custom {
+    background-color: #16213e;
+    border-bottom: 2px solid #e94560;
+    margin-bottom: 3rem;
+    padding: 1rem 0;
+}
+
+.navbar-brand {
+    color: #e94560 !important;
+    font-weight: bold;
+    text-transform: uppercase;
+}
+
+/* Card Container */
+.card-custom {
+    background-color: #16213e;
+    border: 1px solid #0f3460;
+    border-radius: 15px;
+    box-shadow: 0 0 20px rgba(0,0,0,0.5);
+    padding: 2rem;
+}
+
+/* Headings */
+h2 {
+    font-family: 'Oswald', sans-serif;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    color: #e94560;
+    text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
+}
+
+/* Table Styling */
+.table-custom {
+    margin-bottom: 0;
+    border-color: #0f3460;
+    color: #fff;
+}
+
+.table-custom thead th {
+    background-color: #0f3460;
+    color: #e94560;
+    border-bottom: 2px solid #e94560;
+    text-transform: uppercase;
+    font-size: 0.85rem;
+    padding: 12px;
+}
+
+.table-custom tbody td {
+    background-color: #16213e;
+    color: #fff;
+    vertical-align: middle;
+    border-color: #0f3460;
+    padding: 12px;
+}
+
+/* Hover Effect */
+.table-hover tbody tr:hover td {
+    background-color: #1a1a2e;
+    color: #e94560;
+    transition: 0.3s;
+}
+
+/* Icons */
+i {
+    margin-right: 5px;
+}

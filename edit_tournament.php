@@ -5,68 +5,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Edit Tournament</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
-    
-    <style>
-        body {
-            background-color: #1a1a2e;
-            color: #fff;
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            min-height: 100vh; 
-            display: flex;
-            flex-direction: column;
-        }
-
-        .wrapper {
-            flex: 1; 
-            display: flex;
-            align-items: center;
-            justify-content: center; 
-            width: 100%;
-            padding: 20px;
-        }
-
-       
-        .card {
-            background-color: #16213e;
-            border: 1px solid #0f3460;
-            border-radius: 15px;
-            box-shadow: 0 0 20px rgba(0,0,0,0.5);
-            width: 100%; 
-            max-width: 500px; 
-        }
-
-        .form-control, .form-select {
-            background-color: #0f3460;
-            border: 1px solid #1a1a2e;
-            color: #fff;
-        }
-
-        .form-control:focus, .form-select:focus {
-            background-color: #1a1a2e;
-            border-color: #e94560;
-            color: #fff;
-            box-shadow: none;
-        }
-
-        label { color: #ccc; margin-bottom: 5px; }
-
-        .btn-custom {
-            background-color: #e94560;
-            color: white;
-            font-weight: bold;
-            border: none;
-            transition: 0.3s;
-        }
-        .btn-custom:hover { background-color: #c0354e; color: white; }
-
-        .btn-cancel {
-            background-color: #6c757d;
-            color: white;
-            border: none;
-        }
-        .btn-cancel:hover { background-color: #5a6268; color: white; }
-    </style>
-    <?php
+    <link rel="stylesheet" href="style4.css"> </head>
+<body>
+<?php
 session_start();
 include("connect.php");
 
@@ -77,7 +18,7 @@ if (!isset($_SESSION['role']) || $_SESSION['role'] !== 'admin') {
 
 if (isset($_GET['id'])) {
     $id = $_GET['id'];
-    $sql = "SELECT * FROM `tournaments` WHERE `id` = $id";
+    $sql = "SELECT * FROM `tournaments` WHERE `id` = $id ";
     $result = mysqli_query($conn, $sql);
     $row = mysqli_fetch_assoc($result);
 
@@ -115,8 +56,6 @@ if (isset($_POST['b1'])) {
     }
 }
 ?>
-</head>
-<body>
 
     <nav class="navbar navbar-dark bg-dark">
         <div class="container">
@@ -127,10 +66,9 @@ if (isset($_POST['b1'])) {
 
     <div class="wrapper">
         <div class="card p-4">
-            <h3 class="text-center mb-4" style="color: #e94560;">Edit Tournament</h3>
+            <h3 class="text-center mb-4 card-title-text">Edit Tournament</h3>
             
             <form method="post">
-                
                 <div class="mb-3">
                     <label class="form-label">Tournament Name</label>
                     <input type="text" name="name" class="form-control" value="<?php echo $name; ?>" required>
@@ -168,7 +106,6 @@ if (isset($_POST['b1'])) {
                 <div class="d-grid gap-2">
                     <input type="submit" name="b1" class="btn btn-custom" value="Update Tournament">
                 </div>
-
             </form>
         </div>
     </div>

@@ -1,5 +1,17 @@
-<?php
-// كود PHP (زي ما هو، ما تلمسه)
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Create New Account</title>
+    
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    
+    <link rel="stylesheet" href="stylere2.css">
+    
+</head>
+<body>
+    <?php
 $user_name="";
 $email="";
 $tpassword=0;
@@ -32,20 +44,6 @@ if(isset($_POST["b1"]))
     }
 }
 ?>
-
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Create New Account</title>
-    
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
-    
-    <link rel="stylesheet" href="stylere2.css">
-    
-</head>
-<body>
 
 <div class="container">
     <div class="row justify-content-center">
