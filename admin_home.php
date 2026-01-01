@@ -10,6 +10,7 @@
         .form-control, .form-select { background-color: #0f3460; border: none; color: white; }
         .form-control:focus { background-color: #0f3460; color: white; box-shadow: none; }
     </style>
+    
 </head>
 <body>
     <?php
@@ -104,9 +105,10 @@ if (isset($_GET['success'])) {
                             <th>Date</th>
                             <th>Prize</th>
                             <th>Status</th>
+                            <th>Action</th>
                         </tr>
                         <?php
-                         $sql2 = "SELECT * FROM tournaments ORDER BY id DESC";
+                         $sql2 = "SELECT * FROM tournaments ORDER BY id ";
                $result2 = mysqli_query($conn, $sql2);
                         
                 while ($row = mysqli_fetch_assoc($result2)) {
@@ -117,10 +119,18 @@ if (isset($_GET['success'])) {
                           echo "<td>" . $row['date'] . "</td>";
                           echo "<td>" . $row['prize'] . "</td>";
                         echo "<td>" . $row['status'] . "</td>";
-                            echo "</tr>";
+                       echo "<td>";
+    
+                           echo "<a href='edit_tournament.php?id=".$row['id']."' class='btn btn-warning btn-sm me-2'>Edit</a>";
+
+                      echo "<a href='admin_home.php?delete_id=".$row['id']."' onclick='return confirm(\"Sure?\")' class='btn btn-danger btn-sm me-2'>Delete</a>";
+    
+                       echo "<a href='view_registrations.php?id=".$row['id']."' class='btn btn-info btn-sm'>Show Players</a>";
+    
+                          echo "</td>";
+
                         }
                         ?>
-
                     </thead>
                     <tbody>
                         
@@ -130,6 +140,10 @@ if (isset($_GET['success'])) {
         </div>
     </div>
 </div>
+<br><br>
+<br><br>
+<br><br>
 
+ <?php include('footer.php'); ?>
 </body>
 </html>
