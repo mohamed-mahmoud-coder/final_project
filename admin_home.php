@@ -15,13 +15,30 @@
 <body>
     <?php
 session_start();
-include("connect.php");
+include("connect.php");//f
 
 
 if (!isset($_SESSION['role']) || $_SESSION['role'] !== 'admin') {
     header("Location: login.php");
     exit();
 }
+if (isset($_GET['delete_id'])) {
+    $delete_id = $_GET['delete_id'];
+    $sql_delete = "DELETE FROM `tournaments` WHERE `id` = $delete_id";
+    mysqli_query($conn, $sql_delete);
+    header("Location: admin_home.php");
+    exit();
+}
+
+if (isset($_GET['logout']) && $_GET['logout'] == 1) {
+    session_destroy();
+    session_unset();
+    header("Location: login.php");
+    exit();
+   
+}
+
+
 
 $msg = "";
 
@@ -54,7 +71,7 @@ if (isset($_GET['success'])) {
 <nav class="navbar navbar-dark bg-dark mb-4">
     <div class="container">
         <span class="navbar-brand">Admin Control Panel</span>
-        <a href="login.php" class="btn btn-danger btn-sm">Logout</a>
+        <a href="?logout=1" class="btn btn-danger btn-sm">Logout</a>
     </div>
 </nav>
 

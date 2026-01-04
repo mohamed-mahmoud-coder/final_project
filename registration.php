@@ -14,7 +14,7 @@
     <?php
 $user_name="";
 $email="";
-$tpassword=0;
+$tpassword="";
 $role="";
 $game_name="";
 $avatar="";

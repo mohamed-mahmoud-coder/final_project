@@ -1,0 +1,313 @@
+<?php
+session_start();
+include("connect.php"); // الاتصال بقاعدة البيانات
+?>
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gaming Hub - Home</title>
+    <link href="https://fonts.googleapis.com/css?family=Karla:400,700&display=swap" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    
+    <style>
+        /* إعدادات الألوان والخطوط العامة */
+        body {
+            background-color: #0d0d12;
+            font-family: 'Karla', sans-serif;
+            color: #ffffff;
+            overflow-x: hidden;
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+        }
+
+        /* تنسيق الهيدر */
+        .navbar {
+            background-color: #000000;
+            padding: 15px 0;
+            border-bottom: 1px solid #222;
+        }
+        .navbar-brand {
+            font-size: 24px;
+            font-weight: bold;
+            color: #ffffff !important;
+            letter-spacing: 1px;
+        }
+        .nav-link {
+            color: #b0b0b0 !important;
+            font-size: 16px;
+            margin-left: 20px;
+            transition: 0.3s;
+        }
+        .nav-link:hover, .nav-link.active {
+            color: #ffffff !important;
+        }
+        .btn-header {
+            background-color: #ff4757;
+            color: white;
+            border-radius: 50px;
+            padding: 8px 25px;
+            font-weight: bold;
+            text-decoration: none;
+            transition: 0.3s;
+            margin-left: 20px;
+        }
+        .btn-header:hover {
+            background-color: #e84142;
+            color: white;
+            transform: translateY(-2px);
+        }
+
+        /* Hero Section */
+        .hero-section {
+            background: linear-gradient(rgba(0,0,0,0.7), rgba(0,0,0,0.7)), url('https://images.unsplash.com/photo-1542751371-adc38448a05e?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80');
+            background-size: cover;
+            background-position: center;
+            height: 80vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+        }
+        .hero-title {
+            font-size: 3.5rem;
+            font-weight: bold;
+            margin-bottom: 20px;
+            text-transform: uppercase;
+        }
+        .hero-text {
+            font-size: 1.2rem;
+            color: #dcdcdc;
+            margin-bottom: 30px;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+        .btn-hero {
+            background-color: #ff4757;
+            color: #fff;
+            padding: 15px 40px;
+            font-size: 18px;
+            font-weight: bold;
+            border: none;
+            border-radius: 5px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            transition: 0.3s;
+        }
+        .btn-hero:hover {
+            background-color: #fff;
+            color: #ff4757;
+        }
+
+        /* عناوين الأقسام */
+        .section-title {
+            font-size: 2.5rem;
+            font-weight: bold;
+            margin-bottom: 50px;
+            text-align: center;
+            position: relative;
+        }
+        .section-title::after {
+            content: '';
+            width: 80px;
+            height: 4px;
+            background-color: #ff4757;
+            position: absolute;
+            bottom: -15px;
+            left: 50%;
+            transform: translateX(-50%);
+        }
+
+        /* بطاقات البطولات */
+        .tournament-card {
+            background-color: #16213e;
+            border: 1px solid #1f2f50;
+            border-radius: 10px;
+            overflow: hidden;
+            transition: transform 0.3s ease;
+            height: 100%;
+        }
+        .tournament-card:hover {
+            transform: translateY(-10px);
+            border-color: #ff4757;
+        }
+        .card-img-top {
+            height: 200px;
+            object-fit: cover;
+        }
+        .card-body {
+            padding: 25px;
+        }
+        .game-badge {
+            background-color: #ff4757;
+            color: white;
+            padding: 5px 10px;
+            font-size: 12px;
+            border-radius: 4px;
+            text-transform: uppercase;
+            font-weight: bold;
+        }
+        .card-title {
+            font-size: 1.5rem;
+            margin-top: 15px;
+            margin-bottom: 10px;
+        }
+        .prize-text {
+            color: #4cd137;
+            font-weight: bold;
+            font-size: 1.2rem;
+        }
+        .btn-join {
+            width: 100%;
+            background-color: transparent;
+            border: 2px solid #ff4757;
+            color: #fff;
+            font-weight: bold;
+            padding: 10px;
+            margin-top: 15px;
+            transition: 0.3s;
+        }
+        .btn-join:hover {
+            background-color: #ff4757;
+            color: #fff;
+        }
+
+        /* قسم الفيديوهات */
+        .video-wrapper {
+            position: relative;
+            padding-bottom: 56.25%;
+            height: 0;
+            overflow: hidden;
+            border-radius: 10px;
+            border: 2px solid #333;
+        }
+        .video-wrapper iframe {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+        }
+
+        /* تعديل الفوتر ليكون في الأسفل دائماً */
+        footer {
+            margin-top: auto; 
+        }
+
+    </style>
+</head>
+<body>
+
+    <nav class="navbar navbar-expand-lg navbar-dark fixed-top">
+        <div class="container">
+            <a class="navbar-brand" href="index.php">GAMING HUB</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse justify-content-end" id="navbarNav">
+                <ul class="navbar-nav align-items-center">
+                    <li class="nav-item"><a class="nav-link active" href="index.php">Home</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#">Tournaments</a></li>
+                    
+                    <?php if(isset($_SESSION['username'])): ?>
+                        <li class="nav-item"><a class="nav-link" href="home.php">My Dashboard</a></li>
+                         <li class="nav-item"><a class="btn-header" href="login.php?logout=1">Logout</a></li>
+                    <?php else: ?>
+                        <li class="nav-item"><a class="btn-header" href="login.php">Login</a></li>
+                        <li class="nav-item"><a class="nav-link" href="registration.php" style="font-size: 14px;">Register</a></li>
+                    <?php endif; ?>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <section class="hero-section">
+        <div class="container">
+            <h1 class="hero-title">Dominate The Arena</h1>
+            <p class="hero-text">Join the world's biggest eSports tournaments. Compete with top players, win huge cash prizes, and build your legacy.</p>
+            <a href="registration.php" class="btn btn-hero">Start Competing Now</a>
+        </div>
+    </section>
+
+    <section class="container py-5 mt-5">
+        <h2 class="section-title">Active Tournaments</h2>
+        <div class="row g-4 mt-3">
+            
+            <?php
+            // جلب البيانات من الجدول
+            $sql = "SELECT * FROM tournaments ORDER BY id DESC";
+            $result = mysqli_query($conn, $sql);
+
+            if (mysqli_num_rows($result) > 0) {
+                while($row = mysqli_fetch_assoc($result)) {
+                    
+                    // تحديد صورة افتراضية بناءً على اسم اللعبة
+                    $game_img = "";
+                    $g_name = strtolower($row['game_name']);
+                    
+                    if(strpos($g_name, 'duty') !== false) {
+                        $game_img = "https://images.unsplash.com/photo-1593305841991-05c29736f87e?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=80"; // صورة COD
+                    } elseif(strpos($g_name, 'fifa') !== false) {
+                        $game_img = "https://images.unsplash.com/photo-1493711662062-fa541adb3fc8?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=80"; // صورة FIFA
+                    } elseif(strpos($g_name, 'valorant') !== false) {
+                        $game_img = "https://images.unsplash.com/photo-1624138784181-dc7f5b75e63c?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=80"; // صورة Valorant
+                    } elseif(strpos($g_name, 'pubg') !== false) {
+                        $game_img = "https://images.unsplash.com/photo-1542751371-adc38448a05e?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=80"; // صورة عامة
+                    } else {
+                        $game_img = "https://images.unsplash.com/photo-1542751371-adc38448a05e?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=80"; // صورة افتراضية
+                    }
+
+                    // بداية عرض الكارت
+                    echo '
+                    <div class="col-md-4">
+                        <div class="tournament-card">
+                            <img src="'.$game_img.'" class="card-img-top" alt="'.$row['game_name'].'">
+                            <div class="card-body">
+                                <span class="game-badge">'.$row['game_name'].'</span>
+                                <h5 class="card-title">'.$row['name'].'</h5>
+                                <p class="text-muted"><i class="far fa-calendar-alt me-2"></i> '.$row['date'].'</p>
+                                <div class="d-flex justify-content-between align-items-center">
+                                    <span class="prize-text">'.$row['prize'].'</span>
+                                    <span class="text-white">'.$row['status'].'</span>
+                                </div>
+                                <a href="login.php" class="btn btn-join">Join Tournament</a>
+                            </div>
+                        </div>
+                    </div>';
+                }
+            } else {
+                echo "<p class='text-center text-muted'>No tournaments available at the moment.</p>";
+            }
+            ?>
+
+        </div>
+    </section>
+
+    <section class="container py-5 mb-5">
+        <h2 class="section-title">Top Gameplay Highlights</h2>
+        <div class="row g-4 mt-3">
+            <div class="col-md-6">
+                <div class="video-wrapper">
+                    <iframe src="https://www.youtube.com/embed/HB4k6XtiRdY" title="YouTube video" allowfullscreen></iframe>
+                </div>
+                <h4 class="mt-3">Top Pro Plays 2025</h4>
+            </div>
+            <div class="col-md-6">
+                <div class="video-wrapper">
+                    <iframe src="https://www.youtube.com/embed/3u2LgAksdE0" title="YouTube video" allowfullscreen></iframe>
+                </div>
+                <h4 class="mt-3">Valorant Champions Highlights</h4>
+            </div>
+        </div>
+    </section>
+
+    <?php include('footer.php'); ?>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

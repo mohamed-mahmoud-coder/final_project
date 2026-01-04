@@ -6,76 +6,64 @@
     <title>Player Home</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
     
-    <style>
-        .game-card { transition: transform 0.3s ease; cursor: pointer; }
-        .game-card:hover { transform: scale(1.05); opacity: 0.8; }
-        .game-img { 
-            width: 100%; 
-            height: 220px; 
-            object-fit: cover; 
-            object-position: top; 
-            border-radius: 15px; 
-            border: 2px solid #2a2a40; 
-        }
-        .game-title { text-align: center; margin-top: 5px; font-size: 0.9rem; color: #ccc; }
-        body { background-color: #1a1a2e; color: #fff; font-family: sans-serif; }
-        .card { background-color: #16213e; border: 1px solid #0f3460; color: white; margin-top: 20px; }
-        .profile-img { width: 150px; height: 150px; border-radius: 50%; border: 4px solid #e94560; object-fit: cover; margin-top: -75px; background-color: #1a1a2e; }
-        .header-bg { background: linear-gradient(90deg, #0f3460 0%, #e94560 100%); height: 150px; border-radius: 0 0 20px 20px; }
-        .table-dark { background-color: #16213e; }
-        .btn-custom { background-color: #e94560; color: white; border: none; }
-        .btn-custom:hover { background-color: #c0354e; color: white; }
-    </style>
+    <link rel="stylesheet" href="stylehome.css">
 
 </head>
 <?php
+
+
+
+
 session_start();
 include("connect.php");
+if (isset($_GET['logout'])) {
+    session_destroy();
+    header("Location: login.php");
+    exit();
+}
+
+
+
+
 
 if (!isset($_SESSION['username']) || $_SESSION['role'] != 'player') {
     header("Location: login.php");
     exit();
 }
 
-$id = $_SESSION['id'];
+$id = $_SESSION['id'];// Get user ID from session veryyyy important
 $sql = "SELECT * FROM `users` WHERE `id` = $id";
 $result = mysqli_query($conn, $sql);
 $row = mysqli_fetch_assoc($result);
 
 if (isset($_POST['b1'])) {
-    $tournament_id = $_POST['tournament_id'];
+  $tournament_id = $_POST['tournament_id'];//from dowen 
     $user_id = $_SESSION['id'];
 
-    $sql3 = "SELECT * FROM `registrations` WHERE `user_id` = $user_id AND `tournament_id` = $tournament_id";
+    $sql3 = "SELECT * FROM `registrations` WHERE `user_id` = $user_id AND `tournament_id` = $tournament_id";// stored in
     $check_result = mysqli_query($conn, $sql3);
 
     if (mysqli_num_rows($check_result) > 0) {
         echo "<script>alert('You have already joined this tournament!');</script>";
     } else {
         $sql4 = "INSERT INTO `registrations` (`user_id`, `tournament_id`)
-         VALUES ($user_id, $tournament_id)";
+         VALUES ($user_id, $tournament_id)";// stored in foirgnkey
         if (mysqli_query($conn, $sql4)) {
             echo "<script>alert('Successfully joined the tournament!');</script>";
         } else {
             echo "<script>alert('Error joining tournament. Please try again.');</script>";
         }
+
     }
+
 }
-
-
-
-
-
-
-
-
 ?>
 <body>
 
     <nav class="navbar navbar-dark bg-dark">
         <div class="container">
             <span class="navbar-brand mb-0 h1">Gaming Hub</span>
-            <a href="logout.php" class="btn btn-outline-danger btn-sm">Logout</a>
+            <a href="login.php?logout=1" class="btn btn-outline-danger btn-sm">Logout</a>
         </div>
     </nav>
 
@@ -122,19 +110,19 @@ if (isset($_POST['b1'])) {
                             $sql2 = "SELECT * FROM `tournaments`";
                             $result2 = mysqli_query($conn , $sql2);
                             
-                      while($row2 = mysqli_fetch_assoc($result2))
+                            while($row2 = mysqli_fetch_assoc($result2))
                             {
                                 echo "<tr>";
                              echo "<td>".$row2['id']."</td>";
-                                echo "<td>".$row2['name']."</td>";
+                             echo "<td>".$row2['name']."</td>";
                              echo "<td>".$row2['game_name']."</td>";
                                 echo "<td>".$row2['date']."</td>";
                              echo "<td>".$row2['prize']."</td>";
                                 echo "<td>".$row2['status']."</td>";
                             echo "<td>";
                                 echo "<form method='post'>"; 
-                                echo "<input type='hidden' name='tournament_id' value='".$row2['id']."'>";
-                                echo "<button type='submit' name='b1' class='btn btn-sm btn-custom'>Join</button>";
+                                echo "<input type='hidden' name='tournament_id' value='".$row2['id']."'>";//important hereeeee
+                             echo "<button type='submit' name='b1' class='btn btn-sm btn-custom'>Join</button>";
                                 echo "</form>";
                                 echo "</td>";
                             }

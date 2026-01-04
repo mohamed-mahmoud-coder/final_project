@@ -21,13 +21,13 @@ if(isset($_POST["b1"]))
     include("connect.php");
     session_start();
     
-    $user_name = $_POST["username"];
-    $tpassword = $_POST["password"]; 
+    $user_name = $_POST["username"];   // Getting username from form
+    $tpassword = $_POST["password"]; // Getting password from form
     
     $sql = "SELECT * FROM users WHERE username='$user_name' AND password='$tpassword'";
-    $result = mysqli_query($conn, $sql);
+    $result = mysqli_query($conn, $sql);//عشان نحكم اليوسر بالباسور ويوسر نيم موجودين فعلا
 
-    if(mysqli_num_rows($result) === 1) 
+    if(mysqli_num_rows($result) === 1) //1 row
     {
         $row = mysqli_fetch_assoc($result);
         $_SESSION['id'] = $row['id'];
@@ -36,14 +36,19 @@ if(isset($_POST["b1"]))
       
         if($row['role'] == 'admin' && $tpassword == '123') {
             header("Location: admin_home.php"); 
+            exit();
+            
         } else {
             header("Location: home.php"); 
+            exit();
+           
         }
-        exit();
+        
+        
     }
     else 
     {
-        echo "<script>alert('Incorrect Username, Password or Role!');</script>";
+        echo "<script>alert('Incorrect Username, Password or Role!');</spcrit>";//fedback 
     }
 }
 ?>
