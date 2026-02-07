@@ -34,6 +34,7 @@
                             <th><i class="fa-solid fa-user"></i> Player Username</th>
                             <th><i class="fa-solid fa-envelope"></i> Player Email</th>
                             <th><i class="fa-regular fa-calendar"></i> Registration Date</th>
+                            <th><i class="fa-solid fa-sliders"></i> Actions</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -63,6 +64,10 @@
                         echo "<td>" . $row['username'] . "</td>";
                         echo "<td>" . $row['email'] . "</td>";
                         echo "<td>" . $row['registration_date'] . "</td>";
+                        echo "<td>";
+                        echo "<a href='edit_registration.php?id=" . $row['id'] . "' class='btn btn-sm btn-warning'><i class='fa-solid fa-edit'></i> Edit</a> ";
+                        echo "<a href='delete_registration.php?id=" . $row['id'] . "' class='btn btn-sm btn-danger' onclick='return confirm(\"Are you sure?\")'><i class='fa-solid fa-trash'></i> Delete</a>";
+                        echo "</td>";
                         echo "</tr>";
                     }
                     ?>

@@ -1,12 +1,13 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+    <link rel="stylesheet" href="stylehome.css">
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Player Home</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
     
-    <link rel="stylesheet" href="stylehome.css">
+     <link rel="stylesheet" href="stylehome.css">
 
 </head>
 <?php
@@ -31,23 +32,23 @@ if (!isset($_SESSION['username']) || $_SESSION['role'] != 'player') {
     exit();
 }
 
-$id = $_SESSION['id'];// Get user ID from session veryyyy important
+$id = $_SESSION['id'];
 $sql = "SELECT * FROM `users` WHERE `id` = $id";
 $result = mysqli_query($conn, $sql);
 $row = mysqli_fetch_assoc($result);
 
 if (isset($_POST['b1'])) {
-  $tournament_id = $_POST['tournament_id'];//from dowen 
+  $tournament_id = $_POST['tournament_id'];
     $user_id = $_SESSION['id'];
 
-    $sql3 = "SELECT * FROM `registrations` WHERE `user_id` = $user_id AND `tournament_id` = $tournament_id";// stored in
+    $sql3 = "SELECT * FROM `registrations` WHERE `user_id` = $user_id AND `tournament_id` = $tournament_id";
     $check_result = mysqli_query($conn, $sql3);
 
     if (mysqli_num_rows($check_result) > 0) {
         echo "<script>alert('You have already joined this tournament!');</script>";
     } else {
         $sql4 = "INSERT INTO `registrations` (`user_id`, `tournament_id`)
-         VALUES ($user_id, $tournament_id)";// stored in foirgnkey
+         VALUES ($user_id, $tournament_id)";
         if (mysqli_query($conn, $sql4)) {
             echo "<script>alert('Successfully joined the tournament!');</script>";
         } else {

@@ -11,6 +11,11 @@
 </head>
 <body>
     <?php
+
+
+
+
+
 $user_name = "";
 if(isset($_GET["username"])){
     $user_name = $_GET["username"];
@@ -87,6 +92,8 @@ if(isset($_POST["b1"]))
 
     </div>
 </div>
+
+<a href="index.php" class="btn btn-dark" style="position: absolute; top: 10px; right: 10px;">back to home</a>
 
 </body>
 </html>
